@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>System Monitor (htop)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>System Monitor (htop)</h1>
+    
+    <h2>User Information</h2>
+    <p><strong>Name:</strong> {{ name }}</p>
+    <p><strong>Username:</strong> {{ username }}</p>
+    <p><strong>Server Time (IST):</strong> {{ server_time }}</p>
+
+    <h2>CPU Usage</h2>
+    <p>{{ cpu_usage }}%</p>
+    
+    <h2>Memory Usage</h2>
+    <p>Total: {{ memory_info.total }} bytes</p>
+    <p>Used: {{ memory_info.used }} bytes</p>
+    <p>Available: {{ memory_info.available }} bytes</p>
+    <p>Usage: {{ memory_info.percent }}%</p>
+    
+    <h2>Top Processes (by CPU %)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>PID</th>
+                <th>Name</th>
+                <th>CPU %</th>
+                <th>Memory %</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proc in processes %}
+            <tr>
+                <td>{{ proc.pid }}</td>
+                <td>{{ proc.name }}</td>
+                <td>{{ proc.cpu_percent }}</td>
+                <td>{{ proc.memory_percent|round(2) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
