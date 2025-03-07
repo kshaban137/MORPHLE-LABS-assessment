@@ -7,16 +7,16 @@ app = Flask(__name__)
 
 @app.route('/htop')
 def htop():
-    # Get system information
-    name = "Khan Mohd Shaban Wasiullah"  # Replace with your full name
-    username = os.getenv("USER", "codespace")  # Retrieve the system username
+
+    name = "Khan Mohd Shaban Wasiullah"  
+    username = os.getenv("USER", "codespace")  
     server_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # Get CPU and Memory stats
+
     cpu_usage = psutil.cpu_percent(interval=1)
     memory_info = psutil.virtual_memory()
 
-    # Get running processes (sorted by CPU usage)
+
     processes = []
     for proc in psutil.process_iter(['pid', 'name', 'cpu_percent', 'memory_percent']):
         try:
